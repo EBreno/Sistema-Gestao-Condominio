@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestão</title>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="container">
+    <span class="header-title">Sistema de Gestão de Condomínio</span>
+    <div class="header">
+      <div>
+        <input type="text" id="search" placeholder="Pesquisar...">
+        <button id="btnMorador" class="hide" onclick="openModalMorador()">Novo Morador</button>
+        <button id="btnFuncionario" class="hide" onclick="openModalFuncionario()">Novo Funcionário</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-button" onclick="showTab('moradores')">Moradores</button>
+      <button class="tab-button" onclick="showTab('funcionarios')">Funcionários</button>
+      <button class="tab-button" onclick="showTab('geral')">Geral</button>
+    </div>
+
+    <div class="tab-content" id="moradores">
+      <div class="divTable">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Apartamento</th>
+              <th>CPF</th>
+              <th>Telefone</th>
+              <th class="acao">Editar</th>
+              <th class="acao">Excluir</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-moradores"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="funcionarios" style="display:none;">
+      <div class="divTable">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Telefone</th>
+              <th>Salário</th>
+              <th>Função</th>
+              <th class="acao">Editar</th>
+              <th class="acao">Excluir</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-funcionarios"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="geral" style="display:none;">
+      <div class="divTable">
+        <table>
+          <thead>
+            <tr>
+              <th>Cargo</th>
+              <th>Nome</th>
+              <th>Função</th>
+              <th>Telefone</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-geral"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-container moradores">
+    <div class="modal">
+      <form id="form-morador">
+        <label for="m-nome-morador">Nome</label>
+        <input type="text" id="m-nome-morador" required>
+        <label for="m-apartamento">Apartamento</label>
+        <input type="text" id="m-apartamento" required>
+        <label for="m-cpf-morador">CPF</label>
+        <input type="text" id="m-cpf-morador" required>
+        <label for="m-telefone-morador">Telefone</label>
+        <input type="text" id="m-telefone-morador" required>
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-container funcionarios">
+    <div class="modal">
+      <form id="form-funcionario">
+        <label for="m-nome-funcionario">Nome</label>
+        <input type="text" id="m-nome-funcionario" required>
+        <label for="m-cpf-funcionario">CPF</label>
+        <input type="text" id="m-cpf-funcionario" required>
+        <label for="m-telefone-funcionario">Telefone</label>
+        <input type="text" id="m-telefone-funcionario" required>
+        <label for="m-salario">Salário</label>
+        <input type="text" id="m-salario" required>
+        <label for="m-funcao">Função</label>
+        <input type="text" id="m-funcao" required>
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+  <div class="fixed-info">
+    <table>
+      <tr>
+        <td>Número de Moradores:</td>
+        <td id="num-moradores">0</td>
+        <td>Número de Funcionários:</td>
+        <td id="num-funcionarios">0</td>
+      </tr>
+    </table>
+  </div>  
+  
+  <script src="script.js"></script>
+  <script>
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+      });
+      document.getElementById(tabName).style.display = 'block';
+      
+      // Mostrar ou esconder botões
+      document.getElementById('btnMorador').classList.add('hide');
+      document.getElementById('btnFuncionario').classList.add('hide');
+      if (tabName === 'moradores') {
+        document.getElementById('btnMorador').classList.remove('hide');
+      } else if (tabName === 'funcionarios') {
+        document.getElementById('btnFuncionario').classList.remove('hide');
+      }
+    }
+  </script>
+</body>
+</html>
